@@ -1,6 +1,12 @@
 terraform {
   required_version = ">=0.12"
+cloud {
+    organization = "mesostech"
 
+    workspaces {
+      name = "az-tf"
+    }
+  }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
