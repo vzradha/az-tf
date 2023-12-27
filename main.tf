@@ -26,7 +26,7 @@ resource "azurerm_virtual_network" "taurus" {
 
 }
 
-resource "azurerm_dns_zone" "taurus_dns" {
+resource "azurerm_private_dns_zone" "taurus_dns" {
   name = "taurus.example.com"
   resource_group_name =  azurerm_resource_group.rg.name
 }
