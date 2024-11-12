@@ -31,6 +31,8 @@ resource "azurerm_private_dns_zone" "taurus_dns" {
   resource_group_name =  azurerm_resource_group.rg.name
 }
 
+data "azurerm_client_config" "current" {}
+
 resource "azurerm_key_vault" "example_kv" {
   name                = "vra_test_kv"
   location            = azurerm_resource_group.rg.location
