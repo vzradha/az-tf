@@ -30,3 +30,18 @@ resource "azurerm_private_dns_zone" "taurus_dns" {
   name = "taurus.example.com"
   resource_group_name =  azurerm_resource_group.rg.name
 }
+
+resource "azurerm_key_vault" "example_kv" {
+  name                = "vra_test_kv"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  tenant_id           = data.azurerm_client_config.current.tenant_id
+  sku_name            = "standard"
+}
+
+# Key Vault Secret with a specific version
+resource "azurerm_key_vault_secret" "example_secret" {
+  name         = "my-secret"
+  value        = "super_secret_value"
+  key_vault_id = azurerm_key_vault.example_kv.id
+}
