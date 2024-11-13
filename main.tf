@@ -26,6 +26,17 @@ resource "azurerm_virtual_network" "taurus" {
 
 }
 
+resource "azurerm_network_interface" "taurus_nic" {
+  name                = "taurus-nic"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_virtual_network.subnet[0].id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
 resource "azurerm_private_dns_zone" "taurus_dns" {
   name = "taurus.example.com"
   resource_group_name =  azurerm_resource_group.rg.name
@@ -47,3 +58,16 @@ resource "azurerm_key_vault_secret" "example_secret" {
   value        = "super_secret_value"
   key_vault_id = azurerm_key_vault.example_kv.id
 }
+# Key Vault Secret with a specific version
+resource "azurerm_key_vault_secret" "localadmin" {
+  name         = "localadmin"
+  value        = "localadmin"
+  key_vault_id = azurerm_key_vault.example_kv.id
+}
+resource "azurerm_key_vault_secret" "localadmin_password" {
+  name         = "localadmin_password"
+  value        = "localadmin"
+  key_vault_id = azurerm_key_vault.example_kv.id
+}
+
+
