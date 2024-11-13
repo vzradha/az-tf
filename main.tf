@@ -65,7 +65,7 @@ resource "azurerm_key_vault_secret" "localadmin" {
   key_vault_id = azurerm_key_vault.example_kv.id
 }
 resource "azurerm_key_vault_secret" "localadmin_password" {
-  name         = "localadmin_password"
+  name         = "localadmin-password"
   value        = "localadmin"
   key_vault_id = azurerm_key_vault.example_kv.id
 }
